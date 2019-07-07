@@ -22,6 +22,9 @@
 
 /public/assets
 .byebug_history
+.env
+Gemfile
+Gemfile.lock
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
