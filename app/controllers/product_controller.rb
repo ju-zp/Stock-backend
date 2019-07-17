@@ -1,6 +1,6 @@
 class ProductController < ApplicationController
-
     before_action :get_product, only: [:show, :update, :destroy]
+    skip_before_action :verify_authenticity_token
 
     def index
         @products = Product.all
