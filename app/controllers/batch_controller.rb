@@ -1,7 +1,7 @@
 class BatchController < ApplicationController 
 
   def index
-    @batches = Batches.all
+    @batches = Batch.all
     render json: @batches
   end
 
