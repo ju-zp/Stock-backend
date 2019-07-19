@@ -17,7 +17,8 @@ class ProductController < ApplicationController
     end
 
     def show
-        render json: @product
+        @batches = @product.batches
+        render json: {product: @product, batches: @product.batches}
     end
 
     def update
