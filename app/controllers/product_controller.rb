@@ -7,12 +7,21 @@ class ProductController < ApplicationController
         render json: @products
     end
 
+    def new
+        @product = Product.new
+    end
+
     def create
         @product = Product.new(product_params)
-        if @product.save
-            render json: {status: 200}
+        
+        if @product.validate 
+            if @product.save
+                render json: {status: 200}
+            else
+                render json: {status: 400, message: "Unable to save"}
+            end
         else
-            render json: {status: 400, message: "Unable to save"}
+            render json: { error: @product.errors.messages}, status: :not_acceptable
         end
     end
 
