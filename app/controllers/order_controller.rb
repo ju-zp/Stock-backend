@@ -1,7 +1,8 @@
 class OrderController < ApplicationController 
 
-  def index 
-    render json: {'message' => 'hello'}
+  def index
+    @orders = Order.all
+    render json: @orders
   end
 
 end
