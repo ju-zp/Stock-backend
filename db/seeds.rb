@@ -13,9 +13,9 @@ Product.destroy_all
 
 
 
-bar1 = Product.create(name:'bar1', description:"test description", slug:"bar1")
-bar2 = Product.create(name:'bar2', description:"test description", slug:"bar2")
-bar3 = Product.create(name:'bar3', description:"test description", slug:"bar3")
+bar1 = Product.create(name:'bar1', description:"test description")
+bar2 = Product.create(name:'bar2', description:"test description")
+bar3 = Product.create(name:'bar3', description:"test description")
 
 batch1 = Batch.create(code:'abc', quantity:10, best_before:"2019-10-12", product:bar1, sold:0)
 batch2 = Batch.create(code:'cde', quantity:10, best_before:"2019-10-12", product:bar2, sold:0)
