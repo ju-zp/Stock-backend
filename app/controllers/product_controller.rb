@@ -42,7 +42,6 @@ class ProductController < ApplicationController
     end
 
     def get_product
-        byebug
         @product = Product.find_by slug: params[:slug]
     end
 end
