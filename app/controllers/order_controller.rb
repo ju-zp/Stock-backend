@@ -2,7 +2,9 @@ class OrderController < ApplicationController
 
   def index
     @orders = Order.all
-    render json: @orders
+    newArray = []
+    @orders.map{|o| newArray.push(formatOrderInfo(o))}
+    render json: newArray
   end
 
   private
