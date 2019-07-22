@@ -42,6 +42,7 @@ class ProductController < ApplicationController
     end
 
     def get_product
-        @product = Product.find(params[:id])
+        byebug
+        @product = Product.find_by slug: params[:slug]
     end
 end
