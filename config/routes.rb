@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :product, param: :slug 
+  resources :product, param: :slug
+  get '/productlist', to: 'product#product_list'
   resources :batch, :order
 end

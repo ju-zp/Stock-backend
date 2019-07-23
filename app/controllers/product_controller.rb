@@ -47,7 +47,7 @@ class ProductController < ApplicationController
     def product_list
         @products = Product.all
         @newArray = []
-        @products.map{|p| newArray.push(transform_product(p))}
+        @products.map{|p| @newArray.push(transform_product(p))}
         render json: @newArray
     end
 
@@ -62,6 +62,6 @@ class ProductController < ApplicationController
     end
 
     def transform_product(product)
-        {product: product, batches: @product.batches}
+        {product: product, batches: product.batches}
     end
 end
