@@ -44,6 +44,9 @@ class ProductController < ApplicationController
         render json: {status: 200}
     end
 
+    def product_list
+    end
+
     private 
 
     def product_params
