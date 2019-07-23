@@ -45,6 +45,10 @@ class ProductController < ApplicationController
     end
 
     def product_list
+        @products = Product.all
+        @newArray = []
+        @products.map{|p| newArray.push(transform_product(p))}
+        render json: @newArray
     end
 
     private 
@@ -55,5 +59,9 @@ class ProductController < ApplicationController
 
     def get_product
         @product = Product.find_by slug: params[:slug]
+    end
+
+    def transform_product(product)
+        {product: product, batches: @product.batches}
     end
 end
