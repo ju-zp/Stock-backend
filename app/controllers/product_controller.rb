@@ -12,7 +12,6 @@ class ProductController < ApplicationController
 
     def create
         @product = Product.new(product_params)
-        
         if @product.validate 
             if @product.save
                 render json: {status: 200}
@@ -25,8 +24,11 @@ class ProductController < ApplicationController
     end
 
     def show
+        total = @product.batches.sum{|b| b.quantity}
+        sold = @product.batches.sum{|b| b.sold}
+        stock = total - sold
         @batches = @product.batches
-        render json: {product: @product, batches: @product.batches}
+        render json: {product: @product, batches: @product.batches, total: total, sold: sold, stock: stock}
     end
 
     def update
