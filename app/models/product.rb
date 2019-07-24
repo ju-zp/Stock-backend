@@ -3,10 +3,22 @@ class Product < ApplicationRecord
     has_many :batch_orders, through: :batches
     has_many :orders, through: :batch_orders
     before_create :set_slug
-    validates_uniqueness_of :name, :slug
+    validates_uniqueness_of :name, :slugs
 
     def to_param
         slug
+    end
+
+    def get_total
+        batches.sum{|b| b.quantity}
+    end
+
+    def get_sold
+        batches.sum{|b| b.sold}
+    end
+
+    def get_stock
+        get_total - get_sold
     end
 
     private 

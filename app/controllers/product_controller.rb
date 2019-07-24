@@ -3,7 +3,10 @@ class ProductController < ApplicationController
 
     def index
         @products = Product.all
-        render json: @products
+        @newArray = []
+        @products.map{|p| @newArray.push(format_product(p))}
+        puts @products
+        render json: @newArray
     end
 
     def new
@@ -24,11 +27,9 @@ class ProductController < ApplicationController
     end
 
     def show
-        total = @product.batches.sum{|b| b.quantity}
-        sold = @product.batches.sum{|b| b.sold}
-        stock = total - sold
+        puts @product.get_total
         @batches = @product.batches
-        render json: {product: @product, batches: @product.batches, stock: {total: total, sold: sold, stock: stock}}
+        render json: {product: @product, batches: @product.batches, stock: {total: @product.get_total, sold: @product.get_sold, stock: @product.get_stock}}
     end
 
     def update
@@ -60,6 +61,10 @@ class ProductController < ApplicationController
 
     def get_product
         @product = Product.find_by slug: params[:slug]
+    end
+
+    def format_product(product)
+        {product: product, stock: product.get_stock}
     end
 
     def transform_product(product)
