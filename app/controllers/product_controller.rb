@@ -28,7 +28,7 @@ class ProductController < ApplicationController
         sold = @product.batches.sum{|b| b.sold}
         stock = total - sold
         @batches = @product.batches
-        render json: {product: @product, batches: @product.batches, total: total, sold: sold, stock: stock}
+        render json: {product: @product, batches: @product.batches, stock: {total: total, sold: sold, stock: stock}}
     end
 
     def update
