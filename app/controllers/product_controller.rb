@@ -56,7 +56,9 @@ class ProductController < ApplicationController
     end
 
     def orders
-        render json: @product.orders.order({ created_at: :desc })
+        @newArray = []
+        @product.orders.order({ created_at: :desc }).map{|o| @newArray.push(transform_order(o))}
+        render json: @newArray
     end
 
     private 
@@ -75,5 +77,11 @@ class ProductController < ApplicationController
 
     def transform_product(product)
         {product: product, batches: product.batches}
+    end
+
+    def transform_order(order)
+        @batch_orders = order.batch_orders
+        @total = @batch_orders.sum{|b| b.quantity}
+        {order_ref: order[:order_ref], item_count: @batch_orders.size, quantity: @total}
     end
 end
