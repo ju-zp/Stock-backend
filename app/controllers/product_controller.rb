@@ -1,5 +1,5 @@
 class ProductController < ApplicationController
-    before_action :get_product, only: [:show, :update, :destroy]
+    before_action :get_product, only: [:show, :update, :destroy, :in_stock]
 
     def index
         @products = Product.all
@@ -51,6 +51,10 @@ class ProductController < ApplicationController
         @newArray = []
         @products.map{|p| @newArray.push(transform_product(p))}
         render json: @newArray
+    end
+
+    def in_stock
+        render json: @product.batches.select{|b| b.sold != b.quantity}
     end
 
     private 

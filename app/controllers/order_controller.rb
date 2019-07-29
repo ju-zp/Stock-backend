@@ -16,7 +16,7 @@ class OrderController < ApplicationController
       @batch.save
       @batch_order = BatchOrder.new
       @batch_order.batch_id = b[:batch_id]
-      @batch_order.quantity = b[:quantity]
+      @batch_order.quantity = b[:quantity].to_i
       @batch_order.order = @order
       @batch_order.save
     end
