@@ -1,5 +1,5 @@
 class ProductController < ApplicationController
-    before_action :get_product, only: [:show, :update, :destroy, :in_stock]
+    before_action :get_product, only: [:show, :update, :destroy, :in_stock, :orders]
 
     def index
         @products = Product.all
@@ -27,9 +27,7 @@ class ProductController < ApplicationController
     end
 
     def show
-        puts @product.get_total
-        @batches = @product.batches
-        render json: {product: @product, batches: @product.batches, stock: {total: @product.get_total, sold: @product.get_sold, stock: @product.get_stock}}
+        render json: {product: @product, batches: @product.batches.order({ best_before: :asc }), stock: {total: @product.get_total, sold: @product.get_sold, stock: @product.get_stock}}
     end
 
     def update
@@ -54,7 +52,11 @@ class ProductController < ApplicationController
     end
 
     def in_stock
-        render json: @product.batches.select{|b| b.sold != b.quantity}
+        render json: @product.batches.order({ best_before: :asc }).select{|b| b.sold != b.quantity}
+    end
+
+    def orders
+        render json: @product.orders.order({ created_at: :desc })
     end
 
     private 
