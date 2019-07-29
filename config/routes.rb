@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   resources :product, param: :slug
   get '/productlist', to: 'product#product_list'
   get '/product/:slug/stock', to: 'product#in_stock'
+  get '/product/:slug/orders', to: 'product#orders'
   resources :batch, :order
 end
