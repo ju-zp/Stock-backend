@@ -4,6 +4,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.string :name, unique: true
       t.string :description
       t.string :slug, unique: true
+      t.string :image_url
       t.timestamps
     end
   end

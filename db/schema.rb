@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2019_07_07_120735) do
     t.string "name"
     t.string "description"
     t.string "slug"
+    t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
