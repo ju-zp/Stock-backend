@@ -28,7 +28,7 @@ class BatchController < ApplicationController
   def update
     @batch.code = params[:code]
     @batch.quantity = params[:quantity]
-    @batch.best_before = params[:best_before]
+    @batch.best_before = Date.parse(params[:bestBefore])
     @batch.product = @product
     if(@batch.save) 
       render json: { message: 'success' }
