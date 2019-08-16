@@ -1,5 +1,6 @@
 class BatchController < ApplicationController 
   before_action :get_batch, only: [:show, :update]
+  before_action :get_product, only: [:create, :update]
 
   def index
     @batches = Batch.all
@@ -10,7 +11,6 @@ class BatchController < ApplicationController
 
   def create
     @batch = Batch.new(batch_params)
-    @product = getProduct(params[:barSlug])
     @batch.sold = 0
     @batch.product = @product
     @batch.best_before = Date.parse(params[:bestBefore])
@@ -28,7 +28,13 @@ class BatchController < ApplicationController
   def update
     @batch.code = params[:code]
     @batch.quantity = params[:quantity]
-    byebug
+    @batch.best_before = params[:best_before]
+    @batch.product = @product
+    if(@batch.save) 
+      render json: { message: 'success' }
+    else 
+      render json: { message: 'Unable to edit resource'}
+    end
   end
 
   private
@@ -41,8 +47,8 @@ class BatchController < ApplicationController
     @batch = Batch.find(params[:id])
   end
 
-  def getProduct(slug)
-    Product.find_by({slug: slug})
+  def get_product
+    @product = Product.find_by({slug: params[:barSlug]})
   end
 
   def transformBatchObj(batch)
