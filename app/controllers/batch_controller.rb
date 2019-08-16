@@ -22,8 +22,7 @@ class BatchController < ApplicationController
   end
 
   def show
-    byebug
-    render json: { body: @batch }
+    render json: { body: transformBatchObj(@batch) }
   end
 
   private
