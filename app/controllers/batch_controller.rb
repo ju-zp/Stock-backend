@@ -1,4 +1,5 @@
 class BatchController < ApplicationController 
+  before_action :get_batch, only: :show
 
   def index
     @batches = Batch.all
@@ -20,10 +21,19 @@ class BatchController < ApplicationController
     end
   end
 
+  def show
+    byebug
+    render json: { body: @batch }
+  end
+
   private
 
   def batch_params
     params.require(:batch).permit(:code, :quantity)
+  end
+
+  def get_batch
+    @batch = Batch.find(params[:id])
   end
 
   def getProduct(slug)
