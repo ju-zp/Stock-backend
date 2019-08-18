@@ -61,7 +61,7 @@ class BatchController < ApplicationController
 
   def transform_batch_obj(batch)
     @product = batch.product
-    return {id: batch[:id], code: batch[:code], quantity: batch[:quantity], best_before: batch[:best_before], sold: batch.get_sold_amount, product: @product.name, product_slug: @product.slug}
+    return {id: batch[:id], code: batch[:code], quantity: batch[:quantity], best_before: batch[:best_before], sold: batch[:sold], product: @product.name, product_slug: @product.slug}
   end
 
 end
