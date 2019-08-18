@@ -32,16 +32,21 @@ class OrderController < ApplicationController
     @batch_orders = @order.batch_orders
     data = {}
     data['order_ref'] = @order[:order_ref]
+    data['id'] = @order[:id]
     newArray = []
     @batch_orders.each do |b|
       newObj = {}
       newObj['quantity'] = b.quantity
-      newObj['batch_code'] = b.batch.code
+      newObj['batch'] = b.batch
       newObj['product'] = b.batch.product.name
       newArray.push(newObj)
     end
     data['products'] = newArray
     render json: {body: data}
+  end
+
+  def update
+    byebug
   end
 
   def destroy 
