@@ -22,7 +22,7 @@ class BatchController < ApplicationController
   end
 
   def show
-    render json: { body: transformBatchObj(@batch) }
+    render json: { body: transform_batch_obj(@batch) }
   end
 
   def update
