@@ -1,5 +1,5 @@
 class OrderController < ApplicationController 
-  before_action :get_order, only: :destroy
+  before_action :get_order, only: [:show, :destroy]
 
   def index
     @orders = Order.all
@@ -26,6 +26,22 @@ class OrderController < ApplicationController
     else
       render json: {status: 400, message: "Unable to save"}
     end
+  end
+
+  def show
+    @batch_orders = @order.batch_orders
+    data = {}
+    data['order_ref'] = @order[:order_ref]
+    newArray = []
+    @batch_orders.each do |b|
+      newObj = {}
+      newObj['quantity'] = b.quantity
+      newObj['batch_code'] = b.batch.code
+      newObj['product'] = b.batch.product.name
+      newArray.push(newObj)
+    end
+    data['products'] = newArray
+    render json: {body: data}
   end
 
   def destroy 
