@@ -28,7 +28,7 @@ class OrderController < ApplicationController
     end
   end
 
-  def destroy
+  def destroy 
     batches = @order.batch_orders
     batches.each do |b|
       batch = b.batch
