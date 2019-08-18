@@ -29,6 +29,12 @@ class OrderController < ApplicationController
   end
 
   def destroy
+    batches = @order.batch_orders
+    batches.each do |b|
+      batch = b.batch
+      batch.sold = batch.sold - b[:quantity]
+      batch.save
+    end
     if @order.destroy
       render json: {}
     else
