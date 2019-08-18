@@ -14,7 +14,7 @@ class Product < ApplicationRecord
     end
 
     def get_sold
-        batches.sum{|b| b.sold}
+        batches.sum{|b| b.get_sold_amount}
     end
 
     def get_stock

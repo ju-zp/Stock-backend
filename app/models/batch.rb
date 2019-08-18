@@ -5,6 +5,13 @@ class Batch < ApplicationRecord
 
   before_destroy :destroy_batch_orders, :destroy_orders
 
+  def get_sold_amount
+    orders = self.batch_orders
+    total = 0
+    orders.each{|o| total += o.quantity}
+    total
+  end
+
   private 
 
   def destroy_batch_orders
