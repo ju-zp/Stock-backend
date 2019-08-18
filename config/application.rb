@@ -25,7 +25,11 @@ module Stock
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
+<<<<<<< HEAD
         resource '*', headers: :any, methods: [:get, :post, :delete, :options]
+=======
+        resource '*', headers: :any, methods: [:get, :post, :patch, :options]
+>>>>>>> dacc2c4d214d8bb965aedf90e9f40f3919ee9e54
       end
     end
     # Settings in config/environments/* take precedence over those specified here.
