@@ -4,7 +4,7 @@ class OrderController < ApplicationController
   def index
     @orders = Order.all
     newArray = []
-    @orders.map{|o| newArray.push(formatOrderInfo(o))}
+    @orders.map{|o| newArray.push(format_order_info(o))}
     render json: newArray
   end
 
@@ -29,7 +29,11 @@ class OrderController < ApplicationController
   end
 
   def destroy
-    byebug
+    if @order.destroy
+      render json: {}
+    else
+      render json: {message: 'Unable to delete resource'}
+    end
   end
 
   private
