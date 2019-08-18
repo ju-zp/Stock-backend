@@ -1,4 +1,5 @@
 class OrderController < ApplicationController 
+  before_action :get_order, only: :destroy
 
   def index
     @orders = Order.all
@@ -27,7 +28,15 @@ class OrderController < ApplicationController
     end
   end
 
+  def destroy
+    byebug
+  end
+
   private
+
+  def get_order
+    @order = Order.find params[:id]
+  end
 
   def order_params
     params.require(:order).permit(:order_ref)
