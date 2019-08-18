@@ -33,10 +33,10 @@ class OrderController < ApplicationController
     params.require(:order).permit(:order_ref)
   end
 
-  def formatOrderInfo(order)
+  def format_order_info(order)
     @batch_orders = order.batch_orders
     @total = @batch_orders.sum{|b| b.quantity}
-    return {order_ref: order[:order_ref], item_count: @batch_orders.size, quantity: @total}
+    return {id: order[:id], order_ref: order[:order_ref], item_count: @batch_orders.size, quantity: @total}
   end
 
 end
