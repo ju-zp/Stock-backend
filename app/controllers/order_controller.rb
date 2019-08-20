@@ -13,7 +13,6 @@ class OrderController < ApplicationController
     puts @order
     params[:batches].each do |b|
       @batch = Batch.find(b[:batch_id])
-      @batch.sold = b[:quantity].to_i + @batch.sold
       @batch.save
       @batch_order = BatchOrder.new
       @batch_order.batch_id = b[:batch_id]

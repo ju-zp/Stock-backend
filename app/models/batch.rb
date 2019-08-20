@@ -5,6 +5,10 @@ class Batch < ApplicationRecord
 
   before_destroy :destroy_batch_orders, :destroy_orders
 
+  def get_sold
+    @sold = self.batch_orders.sum{|b| b.quantity}
+  end
+
   private 
 
   def destroy_batch_orders
