@@ -82,7 +82,10 @@ class ProductController < ApplicationController
     end
 
     def transform_product(product)
-        {product: product, batches: product.batches}
+        @batches = product.batches
+        @newArr = []
+        @batches.map{|b| @newArr.push(transform_batch(b))}
+        {product: product, batches: @newArr}
     end
 
     def transform_batch(batch)
