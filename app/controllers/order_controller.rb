@@ -1,5 +1,5 @@
 class OrderController < ApplicationController 
-  before_action :get_order, only: [:show, :destroy]
+  before_action :get_order, only: [:show, :update, :destroy]
 
   def index
     @orders = Order.all
@@ -46,7 +46,13 @@ class OrderController < ApplicationController
   end
 
   def update
-    byebug
+    @order.batch_orders.destroy_all
+    @order[:order_ref] = params[:order_ref]
+    params[:batches].each do |pb|
+      @batch_order = new BatchOrder(batch_id: pb[:batch_id], order_id: @order.id, quantity: pd[:quantity])
+      @batch_order.save
+    end
+    @order.save
   end
 
   def destroy 
