@@ -3,7 +3,6 @@ class CreateBatches < ActiveRecord::Migration[5.2]
     create_table :batches do |t|
       t.string :code
       t.integer :quantity
-      t.integer :sold
       t.references :product, foreign_key: true
       t.datetime :best_before
 

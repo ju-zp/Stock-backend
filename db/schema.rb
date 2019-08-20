@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 2019_07_07_120735) do
   create_table "batches", force: :cascade do |t|
     t.string "code"
     t.integer "quantity"
-    t.integer "sold"
     t.bigint "product_id"
     t.datetime "best_before"
     t.datetime "created_at", null: false
