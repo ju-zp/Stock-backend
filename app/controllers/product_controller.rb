@@ -52,7 +52,7 @@ class ProductController < ApplicationController
     end
 
     def in_stock
-        render json: @product.batches.order({ best_before: :asc }).select{|b| b.sold != b.quantity}
+        render json: @product.batches.order({ best_before: :asc }).select{|b| b.get_sold != b.quantity}
     end
 
     def orders
