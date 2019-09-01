@@ -5,7 +5,7 @@ class ProductController < ApplicationController
         @products = Product.all
         @newArray = []
         @products.map{|p| @newArray.push(format_product(p))}
-        puts @products + "1"
+        puts @products
         render json: @newArray
     end
 
