@@ -24,8 +24,8 @@ module Stock
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'https://5d6bab3bc27cd55d6a7ac140--amazing-ride-749654.netlify.com/'
-        resource 'https://5d6bab3bc27cd55d6a7ac140--amazing-ride-749654.netlify.com/', headers: :any, methods: [:get, :post, :patch, :delete, :options]
+        origins 'https://amazing-ride-749654.netlify.com/'
+        resource 'https://amazing-ride-749654.netlify.com/', headers: :any, methods: [:get, :post, :patch, :delete, :options]
       end
     end
     # Settings in config/environments/* take precedence over those specified here.
