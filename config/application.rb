@@ -24,7 +24,7 @@ module Stock
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'https://serene-lalande-0d830a.netlify.com'
+        origins ENV['SITE_ORIGIN'] 
         resource '*', headers: :any, methods: [:get, :post, :patch, :delete, :options]
       end
     end
