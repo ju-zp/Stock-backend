@@ -88,7 +88,7 @@ class ProductController < ApplicationController
     end
 
     def transform_batch(batch, name)
-        {id: batch[:id], code: batch[:code], quantity: batch[:quantity], product: name product_id: batch[:product_id], best_before: batch[:best_before], sold: batch.get_sold}
+        {id: batch[:id], code: batch[:code], quantity: batch[:quantity], product: name, product_id: batch[:product_id], best_before: batch[:best_before], sold: batch.get_sold}
     end
 
     def transform_order(order)
