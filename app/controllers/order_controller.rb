@@ -56,10 +56,6 @@ class OrderController < ApplicationController
 
   def destroy 
     batches = @order.batch_orders
-    batches.each do |b|
-      batch = b.batch
-      batch.save
-    end
     if @order.destroy
       render json: {}
     else
