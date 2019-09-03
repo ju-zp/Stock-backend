@@ -28,7 +28,7 @@ class ProductController < ApplicationController
     def show
         @orderProducts = @product.batches.order({ best_before: :asc })
         @newArr = []
-        @orderProducts.map{|b| @newArr.push(transform_batch(b))} 
+        @orderProducts.map{|b| @newArr.push(transform_batch(b, @product.name))} 
         render json: {product: @product, batches: @newArr, stock: {total: @product.get_total, sold: @product.get_sold, stock: @product.get_stock}}
     end
 
@@ -56,7 +56,7 @@ class ProductController < ApplicationController
     def in_stock
         @orderProducts = @product.batches.order({ best_before: :asc }).select{|b| b.get_sold != b.quantity}
         @newArr = []
-        @orderProducts.map{|b| @newArr.push(transform_batch(b))} 
+        @orderProducts.map{|b| @newArr.push(transform_batch(b, @product.name))} 
         render json: @newArr
     end
 
@@ -83,12 +83,12 @@ class ProductController < ApplicationController
     def transform_product(product)
         @batches = product.batches
         @newArr = []
-        @batches.map{|b| @newArr.push(transform_batch(b))}
+        @batches.map{|b| @newArr.push(transform_batch(b, product.name))}
         {product: product, batches: @newArr}
     end
 
-    def transform_batch(batch)
-        {id: batch[:id], code: batch[:code], quantity: batch[:quantity], product_id: batch[:product_id], best_before: batch[:best_before], sold: batch.get_sold}
+    def transform_batch(batch, name)
+        {id: batch[:id], code: batch[:code], quantity: batch[:quantity], product: name product_id: batch[:product_id], best_before: batch[:best_before], sold: batch.get_sold}
     end
 
     def transform_order(order)

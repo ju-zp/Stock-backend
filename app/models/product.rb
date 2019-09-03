@@ -24,7 +24,7 @@ class Product < ApplicationRecord
     private 
 
     def set_slug
-        name = self.name.gsub(/\./, '').strip
+        name = self.name.gsub(/\./, '')
         self.slug = name.gsub(' ', '-')
     end
 end
