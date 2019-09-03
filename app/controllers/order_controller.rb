@@ -58,7 +58,6 @@ class OrderController < ApplicationController
     batches = @order.batch_orders
     batches.each do |b|
       batch = b.batch
-      batch.sold = batch.sold - b[:quantity]
       batch.save
     end
     if @order.destroy
