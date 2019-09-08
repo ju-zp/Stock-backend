@@ -83,12 +83,8 @@ class ProductController < ApplicationController
     def transform_product(product)
         @batches = product.batches
         @newArr = []
-        @batches.map do |b| 
-            if(b[:quantity] - b.get_sold > 0)
-                @newArr.push(transform_batch(b, product.name))
-            end
-        end
-        @newArray
+        @batches.map{|b| @newArr.push(transform_batch(b, product.name))}
+        {product: product, batches: @newArr}
     end
 
     def transform_batch(batch, name)
