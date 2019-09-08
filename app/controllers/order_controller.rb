@@ -10,7 +10,6 @@ class OrderController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    byebug
     params[:batches].each do |b|
       @batch = Batch.find_by code: b[:batch]
       @batch_order = BatchOrder.new
