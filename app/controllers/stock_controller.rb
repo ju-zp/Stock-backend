@@ -12,8 +12,12 @@ class StockController < ApplicationController
   def transform_product_info(product)
     @batches = product.batches
     @newArr = []
-    @batches.map{|b| @newArr.push(transform_batch(b, product.name))}
-    {product: { name: product[:name] }, batches: @newArr}
+    @batches.map do |b|
+      if(0 < b.quantity - b.get_sold)
+        @newArr.push(transform_batch(b, product.name))
+      end
+    end
+    {product: product[:name], batches: @newArr}
   end
 
   def transform_batch(batch, name)
