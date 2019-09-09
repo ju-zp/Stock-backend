@@ -50,7 +50,7 @@ class ProductController < ApplicationController
 
     def orders
         @newArray = []
-        @product.orders.order({ created_at: :desc }).map{|o| @newArray.push(transform_order(o))}
+        @product.orders.order({ created_at: :desc }).map{|o| @newArray.push(TransformerHelper::OrderFormat.transform_order(o))}
         render json: @newArray
     end
 
@@ -62,10 +62,6 @@ class ProductController < ApplicationController
 
     def get_product
         @product = Product.find_by slug: params[:slug]
-    end
-
-    def transform_batch(batch, name)
-        {id: batch[:id], code: batch[:code], quantity: batch[:quantity], product: name, product_id: batch[:product_id], best_before: batch[:best_before], sold: batch.get_sold}
     end
 
     def transform_order(order)

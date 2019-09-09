@@ -16,6 +16,16 @@ module TransformerHelper
 
   end
 
+  class OrderFormat
+
+    def self.transform_order(order)
+      @batch_orders = order.batch_orders
+      @total = @batch_orders.sum{|b| b.quantity}
+      {id: order[:id], order_ref: order[:order_ref], item_count: @batch_orders.size, quantity: @total}
+    end
+
+  end
+
   class ProductList
 
     def self.transform_product_info product
