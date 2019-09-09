@@ -4,7 +4,7 @@ class StockController < ApplicationController
     @products = Product.all
     @newArray = []
     @products.map{|p| @newArray.push(transform_product_info(p))}
-    render json: @newArray
+    render json: @newArray.reject{|i| !i}
   end
 
   private
