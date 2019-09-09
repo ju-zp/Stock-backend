@@ -10,12 +10,10 @@ class OrderController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    puts @order
     params[:batches].each do |b|
-      @batch = Batch.find(b[:batch_id])
-      @batch.save
+      @batch = Batch.find_by code: b[:batch]
       @batch_order = BatchOrder.new
-      @batch_order.batch_id = b[:batch_id]
+      @batch_order.batch = @batch
       @batch_order.quantity = b[:quantity].to_i
       @batch_order.order = @order
       @batch_order.save
@@ -47,11 +45,19 @@ class OrderController < ApplicationController
   def update
     @order.batch_orders.destroy_all
     @order[:order_ref] = params[:order_ref]
-    params[:batches].each do |pb|
-      @batch_order = BatchOrder.new(batch_id: pb[:batch_id], order_id: @order.id, quantity: pb[:quantity])
+    params[:batches].each do |b|
+      @batch = Batch.find_by code: b[:batch]
+      @batch_order = BatchOrder.new
+      @batch_order.batch = @batch
+      @batch_order.quantity = b[:quantity].to_i
+      @batch_order.order = @order
       @batch_order.save
     end
-    @order.save
+    if @order.save
+      render json: {status: 200}
+    else
+      render json: {status: 400, message: "Unable to save"}
+    end
   end
 
   def destroy 
