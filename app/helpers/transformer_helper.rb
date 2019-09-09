@@ -27,7 +27,11 @@ module TransformerHelper
 
   class Stock
 
-    def self.transform_batch()
+    def self.transform_batch batch 
+      if batch[:quantity] - batch.get_sold > 0
+        { code: batch[:code], stock: batch[:quantity] - batch.get_sold, best_before: batch[:best_before] }
+      end
     end
+
   end
 end
