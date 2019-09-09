@@ -1,4 +1,4 @@
-class CustomController < ApplicationController
+class StockController < ApplicationController
 
   def product_list
     @products = Product.all
