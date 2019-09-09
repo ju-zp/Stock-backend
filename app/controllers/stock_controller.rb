@@ -17,7 +17,9 @@ class StockController < ApplicationController
         @newArr.push(transform_batch(b, product.name))
       end
     end
-    {product: product[:name], batches: @newArr}
+    if(!@newArr.empty?)
+      {product: product[:name], batches: @newArr}
+    end
   end
 
   def transform_batch(batch, name)
