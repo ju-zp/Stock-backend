@@ -14,7 +14,7 @@ class StockController < ApplicationController
     orderProducts = @product.batches.order({ best_before: :asc })
     newArr = []
     orderProducts.map{|b| newArr.push(transform_batch b )}
-    if newArr[0]
+    if newArr.any?
       render json: newArr
     else
       render json: { message: 'There is no stock available for this product'}
