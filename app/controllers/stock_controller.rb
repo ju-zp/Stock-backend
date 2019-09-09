@@ -8,7 +8,7 @@ class StockController < ApplicationController
     newArray = []
 
     products.map{|p| newArray.push(TransformerHelper::ProductList.transform_product_info p )}
-    
+
     render json: newArray.reject{|i| !i}
   end
 
