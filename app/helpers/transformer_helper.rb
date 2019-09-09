@@ -18,8 +18,6 @@ module TransformerHelper
     def self.transform_batch(batch, name)
       { code: batch[:code], quantity: batch[:quantity], product_id: batch[:product_id], sold: batch.get_sold}
     end
-
+    
   end
-
-  
 end

@@ -1,6 +1,8 @@
 class StockController < ApplicationController
   include TransformerHelper
 
+  before_action :get_product, only: [:in_stock]
+
   def product_list
     @products = Product.all
     @newArray = []
@@ -16,7 +18,13 @@ class StockController < ApplicationController
   end
 
   def transform_batch(batch, name)
-    {id: batch[:id], code: batch[:code], quantity: batch[:quantity], product: name, product_id: batch[:product_id], best_before: batch[:best_before], sold: batch.get_sold}
+    { code: batch[:code], stock: batch[:quantity] - batch.get_sold, best_before: batch[:best_before] }
+  end
+
+  private 
+
+  def get_product
+    @product = Product.find_by slug: params[:slug]
   end
 
 end
