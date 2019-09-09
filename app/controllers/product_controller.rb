@@ -1,10 +1,12 @@
 class ProductController < ApplicationController
     before_action :get_product, only: [:show, :update, :destroy, :in_stock, :orders]
 
+    include TransformerHelper
+
     def index
         @products = Product.all
         @newArray = []
-        @products.map{|p| @newArray.push(format_product(p))}
+        @products.map{|p| @newArray.push(TransformerHelper::ProductFormat.transform_product p )}
         render json: @newArray
     end
 

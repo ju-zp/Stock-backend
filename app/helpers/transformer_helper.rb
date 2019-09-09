@@ -1,5 +1,13 @@
 module TransformerHelper
 
+  class ProductFormat
+
+    def self.transform_product product
+      { product: product, stock: product.get_stock }
+    end
+
+  end
+
   class ProductList
 
     def self.transform_product_info product
