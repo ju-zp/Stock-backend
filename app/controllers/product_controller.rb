@@ -46,13 +46,6 @@ class ProductController < ApplicationController
         render json: {status: 200}
     end
 
-    def in_stock
-        @orderProducts = @product.batches.order({ best_before: :asc }).select{|b| b.get_sold != b.quantity}
-        @newArr = []
-        @orderProducts.map{|b| @newArr.push(transform_batch(b, @product.name))} 
-        render json: @newArr
-    end
-
     def orders
         @newArray = []
         @product.orders.order({ created_at: :desc }).map{|o| @newArray.push(transform_order(o))}
