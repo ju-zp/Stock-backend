@@ -46,13 +46,6 @@ class ProductController < ApplicationController
         render json: {status: 200}
     end
 
-    def product_list
-        @products = Product.all
-        @newArray = []
-        @products.map{|p| @newArray.push(transform_product(p))}
-        render json: @newArray
-    end
-
     def in_stock
         @orderProducts = @product.batches.order({ best_before: :asc }).select{|b| b.get_sold != b.quantity}
         @newArr = []
@@ -78,13 +71,6 @@ class ProductController < ApplicationController
 
     def format_product(product)
         {product: product, stock: product.get_stock}
-    end
-
-    def transform_product(product)
-        @batches = product.batches
-        @newArr = []
-        @batches.map{|b| @newArr.push(transform_batch(b, product.name))}
-        {product: product, batches: @newArr}
     end
 
     def transform_batch(batch, name)
