@@ -33,7 +33,7 @@ class ProductController < ApplicationController
     def show
         orderProducts = @product.batches.order({ best_before: :asc })
         newArr = []
-        orderProducts.map{|b| newArr.push(TransformerHelper::BatchFormat.transform_batch(b, product.name))} 
+        orderProducts.map{|b| newArr.push(TransformerHelper::BatchFormat.transform_batch(b, @product.name))} 
         render json: {product: @product, batches: newArr, stock: {total: @product.get_total, sold: @product.get_sold, stock: @product.get_stock}}
     end
 
@@ -54,7 +54,8 @@ class ProductController < ApplicationController
     def orders
         newArray = []
         @product.orders.order({ created_at: :desc }).map{|o| newArray.push(TransformerHelper::OrderFormat.transform_order o )}
-        render json: @newArray
+        puts newArray
+        render json: newArray
     end
 
     private 
