@@ -13,7 +13,7 @@ class StockController < ApplicationController
     @batches = product.batches
     @newArr = []
     @batches.map{|b| @newArr.push(transform_batch(b, product.name))}
-    {product: product[:name], batches: @newArr}
+    {product: { name: product[:name] }, batches: @newArr}
   end
 
   def transform_batch(batch, name)
