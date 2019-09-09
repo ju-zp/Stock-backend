@@ -3,12 +3,13 @@ class StockController < ApplicationController
   def product_list
     @products = Product.all
     @newArray = []
-    @products.map{|p| @newArray.push(transform_product(p))}
+    @products.map{|p| @newArray.push(transform_product_info(p))}
     render json: @newArray
   end
 
+  private
 
-  def transform_product(product)
+  def transform_product_info(product)
     @batches = product.batches
     @newArr = []
     @batches.map{|b| @newArr.push(transform_batch(b, product.name))}
