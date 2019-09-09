@@ -1,0 +1,3 @@
+class CustomController < ApplicationController
+
+end
