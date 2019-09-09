@@ -8,6 +8,14 @@ module TransformerHelper
 
   end
 
+  class BatchFormat
+
+    def transform_batch(batch, name)
+        {id: batch[:id], code: batch[:code], quantity: batch[:quantity], product: name, product_id: batch[:product_id], best_before: batch[:best_before], sold: batch.get_sold}
+    end
+    
+  end
+
   class ProductList
 
     def self.transform_product_info product
