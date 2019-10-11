@@ -35,7 +35,7 @@ class ProductController < ApplicationController
         orderProducts = @product.batches.order({ best_before: :asc })
         newArr = []
         orderProducts.map{|b| newArr.push(TransformerHelper::BatchFormat.transform_batch(b, @product.name))} 
-        render json: {product: @product, recipe: recipe, batches: newArr, stock: {total: @product.get_total, sold: @product.get_sold, stock: @product.get_stock}}
+        render json: {product: @product, ingredients: recipe, batches: newArr, stock: {total: @product.get_total, sold: @product.get_sold, stock: @product.get_stock}}
     end
 
     def update
