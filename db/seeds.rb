@@ -17,9 +17,9 @@ bar1 = Product.create(name:'bar1', description:"test description")
 bar2 = Product.create(name:'bar2', description:"test description")
 bar3 = Product.create(name:'bar3', description:"test description")
 
-batch1 = Batch.create(code:'abc', quantity:10, best_before:"2019-10-12", product:bar1, sold:0)
-batch2 = Batch.create(code:'cde', quantity:10, best_before:"2019-10-12", product:bar2, sold:0)
-batch3 = Batch.create(code:'fgh', quantity:10, best_before:"2019-10-12", product:bar3, sold:0)
+batch1 = Batch.create(code:'abc', quantity:10, best_before:"2019-10-12", product:bar1)
+batch2 = Batch.create(code:'cde', quantity:10, best_before:"2019-10-12", product:bar2)
+batch3 = Batch.create(code:'fgh', quantity:10, best_before:"2019-10-12", product:bar3)
 
 order1 = Order.create(order_ref:"123")
 order2 = Order.create(order_ref:"456")
