@@ -26,6 +26,18 @@ module TransformerHelper
 
   end
 
+  class IngredientFormat
+
+    def self.transform_ingredients(ingredients)
+      newArray = []
+      ingredients.map do |i|
+        newArray.push({name: i})
+      end
+      newArray
+    end
+
+  end
+
   class ProductList
 
     def self.transform_product_info product
@@ -60,4 +72,5 @@ module TransformerHelper
     end
 
   end
+
 end
