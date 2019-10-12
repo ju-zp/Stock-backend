@@ -31,7 +31,7 @@ module TransformerHelper
     def self.transform_ingredients(ingredients)
       newArray = []
       ingredients.map do |i|
-        newArray.push({name: i})
+        newArray.push({name: i.name})
       end
       newArray
     end
