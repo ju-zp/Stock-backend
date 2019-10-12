@@ -1,5 +1,5 @@
 class RemoveAmountFromRecipeIngredients < ActiveRecord::Migration[5.2]
   def change
-    remove_column :recipe_ingredients, :amount
+    remove_column :recipe_ingredients, :amount, :string
   end
 end

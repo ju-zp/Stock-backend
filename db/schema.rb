@@ -71,8 +71,8 @@ ActiveRecord::Schema.define(version: 2019_10_12_124554) do
     t.bigint "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "ingredient_stock_id"
-    t.index ["ingredient_stock_id"], name: "index_recipe_ingredients_on_ingredient_stock_id"
+    t.bigint "ingredient_id"
+    t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"
     t.index ["recipe_id"], name: "index_recipe_ingredients_on_recipe_id"
   end
 
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2019_10_12_124554) do
   add_foreign_key "batch_orders", "orders"
   add_foreign_key "batches", "products"
   add_foreign_key "ingredient_stocks", "ingredients"
-  add_foreign_key "recipe_ingredients", "ingredient_stocks"
+  add_foreign_key "recipe_ingredients", "ingredients"
   add_foreign_key "recipe_ingredients", "recipes"
   add_foreign_key "recipes", "products"
 end
