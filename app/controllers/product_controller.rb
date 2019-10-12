@@ -31,7 +31,7 @@ class ProductController < ApplicationController
   end
 
   def show
-    ingredients = @product.ingredients
+    ingredients = TransformerHelper::IngredientFormat.transform_ingredients(@product.ingredients)
     orderProducts = @product.batches.order({ best_before: :asc })
     newArr = []
     orderProducts.map{|b| newArr.push(TransformerHelper::BatchFormat.transform_batch(b, @product.name))} 
