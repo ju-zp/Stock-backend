@@ -3,17 +3,21 @@ class RecipeController < ApplicationController
   before_action :get_product, only: [:create]
 
   def create
-    recipe = Recipe.new()
-    recipe.product = @product
-    if (recipe.save())
-      newArray = []
-      params[:ingredients].each do |i|
-        newArray.push(Ingredient.create(name: i)) 
-        recipe.ingredients = newArray
+    if(!@product.recipe)
+      recipe = Recipe.new()
+      recipe.product = @product
+      if (recipe.save())
+        newArray = []
+        params[:ingredients].each do |i|
+          newArray.push(Ingredient.find_or_create_by(name: i)) 
+          recipe.ingredients = newArray
+        end
+        render json: {status: 200}
+      else
+        render json: {status: 200, message: "Unable to save recipe"}
       end
-      render json: {status: 200}
     else
-      render json: {status: 200, message: "Unable to save recipe"}
+      render json: {status: 200, message: "Product already has a recipe"}
     end
   end
 
