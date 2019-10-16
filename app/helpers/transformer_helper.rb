@@ -36,6 +36,14 @@ module TransformerHelper
       newArray
     end
 
+    def self.transform_product_ingredients(ingredients)
+      newArray = []
+      ingredients.map do |i|
+        newArray.push(i.name)
+      end
+      newArray
+    end
+
   end
 
   class ProductList

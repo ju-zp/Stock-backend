@@ -59,7 +59,7 @@ class ProductController < ApplicationController
   end
 
   def ingredients
-    render json: {ingredients: @product.ingredients}
+    render json: TransformerHelper::IngredientFormat.transform_product_ingredients(@product.ingredients)
   end
 
   private 
