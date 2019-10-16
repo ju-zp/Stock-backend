@@ -1,5 +1,5 @@
 class ProductController < ApplicationController
-  before_action :get_product, only: [:show, :update, :destroy, :in_stock, :orders]
+  before_action :get_product, only: [:show, :update, :destroy, :in_stock, :orders, :ingredients]
 
   include TransformerHelper
 
@@ -56,6 +56,10 @@ class ProductController < ApplicationController
     newArray = []
     @product.orders.order({ created_at: :desc }).map{|o| newArray.push(TransformerHelper::OrderFormat.transform_order o )}
     render json: newArray
+  end
+
+  def ingredients
+    render json: {ingredients: @product.ingredients}
   end
 
   private 
