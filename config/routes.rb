@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   get '/productlist', to: 'stock#product_list'
   get '/product/:slug/stock', to: 'stock#in_stock'
   get '/product/:slug/orders', to: 'product#orders'
-  resources :batch, :order
+  get '/product/:slug/ingredients', to: 'product#ingredients'
+  resources :batch, :order, :recipe, :ingredient
 end

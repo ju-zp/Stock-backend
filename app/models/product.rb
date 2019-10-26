@@ -1,4 +1,7 @@
 class Product < ApplicationRecord
+    has_one :recipe
+    has_many :recipe_ingredients, through: :recipe
+    has_many :ingredients, through: :recipe_ingredients
     has_many :batches
     has_many :batch_orders, through: :batches
     has_many :orders, through: :batch_orders
