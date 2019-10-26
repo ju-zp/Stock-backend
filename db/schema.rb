@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 2019_10_12_124554) do
   create_table "batches", force: :cascade do |t|
     t.string "code"
     t.integer "quantity"
-    t.integer "sold"
     t.bigint "product_id"
     t.datetime "best_before"
     t.datetime "created_at", null: false
@@ -69,9 +68,9 @@ ActiveRecord::Schema.define(version: 2019_10_12_124554) do
 
   create_table "recipe_ingredients", force: :cascade do |t|
     t.bigint "recipe_id"
+    t.bigint "ingredient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "ingredient_id"
     t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"
     t.index ["recipe_id"], name: "index_recipe_ingredients_on_recipe_id"
   end
