@@ -6,8 +6,8 @@ class RecipeController < ApplicationController
     if(!@product.recipe)
       recipe = Recipe.new()
       recipe.product = @product
-      if (recipe.save)
-        add_ingredients_to_recipe(params, recipe)
+      recipe.save
+      if add_ingredients_to_recipe(params, recipe)
         render json: {status: 200}
       else
         render json: {status: 200, message: "Unable to save recipe"}
@@ -19,7 +19,11 @@ class RecipeController < ApplicationController
 
   def update
     recipe = @product.recipe
-    puts add_ingredients_to_recipe(params, recipe)
+    if add_ingredients_to_recipe(params, recipe)
+      render json: {status: 200}
+    else
+      render json: {status: 200, message: "Unable to save recipe"}
+    end
   end
 
   private
@@ -33,8 +37,8 @@ class RecipeController < ApplicationController
     params[:ingredients].each do |i|
       newArray.push(Ingredient.find_or_create_by(name: i)) 
       recipe.ingredients = newArray
-      recipe.save
     end
+    recipe.save
   end
 
 end
