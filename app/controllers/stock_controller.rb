@@ -27,8 +27,10 @@ class StockController < ApplicationController
   end
 
   def ingredient_stock
-    puts @ingredient
-    byebug
+    if @ingredient
+      render json: @ingredient.ingredient_stocks
+    end
+    render json: { message: 'Could not find ingredient'}
   end
 
   private 
