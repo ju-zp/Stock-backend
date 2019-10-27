@@ -29,8 +29,9 @@ class StockController < ApplicationController
   def ingredient_stock
     if @ingredient
       render json: @ingredient.ingredient_stocks
+    else
+      render json: { message: 'Could not find ingredient'}
     end
-    render json: { message: 'Could not find ingredient'}
   end
 
   private 
