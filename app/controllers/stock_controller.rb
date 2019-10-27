@@ -35,4 +35,8 @@ class StockController < ApplicationController
     @product = Product.find_by slug: params[:slug]
   end
 
+  def get_ingredient
+    @ingredient = Ingredient.find_by name: params[:name]
+  end
+
 end
