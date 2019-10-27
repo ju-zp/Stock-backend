@@ -2,7 +2,7 @@ class StockController < ApplicationController
   include TransformerHelper
 
   before_action :get_product, only: [:in_stock]
-  before_action :get_ingredient, only: [:get_ingredient]
+  before_action :get_ingredient, only: [:ingredient_stock]
 
   def product_list
     products = Product.all
@@ -28,6 +28,7 @@ class StockController < ApplicationController
 
   def ingredient_stock
     puts @ingredient
+    byebug
   end
 
   private 
