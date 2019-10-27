@@ -25,6 +25,10 @@ class StockController < ApplicationController
     end
   end
 
+  def ingredient_stock
+    puts params 
+  end
+
   private 
 
   def get_product
