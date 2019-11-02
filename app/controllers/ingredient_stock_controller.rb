@@ -11,12 +11,23 @@ class IngredientStockController < ApplicationController
   end
 
   def create
+    stock = IngredientStock.new ingredient_stock_params
+    stock.ingredient = @ingredient
+    if stock.save
+      render json: {status: 200}
+    else
+      render json: {status: 400, message: "Unable to save"}
+    end
   end
 
   private
 
+  def ingredient_stock_params
+    params.require(:ingredient_stock).permit(:rec, :best_before, :shelf)
+  end
+
   def get_ingredient
-    @ingredient = Ingredient.find_by name: params[:name]
+    @ingredient = Ingredient.find_by name: params[:name].capitalize
   end
 
 end
