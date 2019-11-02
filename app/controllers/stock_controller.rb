@@ -2,7 +2,6 @@ class StockController < ApplicationController
   include TransformerHelper
 
   before_action :get_product, only: [:in_stock]
-  before_action :get_ingredient, only: [:ingredient_stock]
 
   def product_list
     products = Product.all
@@ -26,22 +25,10 @@ class StockController < ApplicationController
     end
   end
 
-  def ingredient_stock
-    if @ingredient
-      render json: @ingredient.ingredient_stocks
-    else
-      render json: { message: 'Could not find ingredient'}
-    end
-  end
-  
   private 
 
   def get_product
     @product = Product.find_by slug: params[:slug]
-  end
-
-  def get_ingredient
-    @ingredient = Ingredient.find_by name: params[:name]
   end
 
 end
