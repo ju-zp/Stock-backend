@@ -33,7 +33,7 @@ class StockController < ApplicationController
       render json: { message: 'Could not find ingredient'}
     end
   end
-
+  
   private 
 
   def get_product
