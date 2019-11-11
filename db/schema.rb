@@ -75,10 +75,10 @@ ActiveRecord::Schema.define(version: 2019_11_02_161853) do
   end
 
   create_table "recipes", force: :cascade do |t|
-    t.bigint "product_id"
+    t.bigint "batch_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_recipes_on_product_id"
+    t.index ["batch_id"], name: "index_recipes_on_batch_id"
   end
 
   add_foreign_key "batch_orders", "batches"
@@ -87,5 +87,5 @@ ActiveRecord::Schema.define(version: 2019_11_02_161853) do
   add_foreign_key "ingredient_stocks", "ingredients"
   add_foreign_key "recipe_ingredients", "ingredients"
   add_foreign_key "recipe_ingredients", "recipes"
-  add_foreign_key "recipes", "products"
+  add_foreign_key "recipes", "batches"
 end
