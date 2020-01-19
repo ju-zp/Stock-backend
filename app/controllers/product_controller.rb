@@ -1,5 +1,5 @@
 class ProductController < ApplicationController
-  before_action :get_product, only: [:show, :update, :destroy, :in_stock, :orders, :ingredients]
+  before_action :get_product, only: [:show, :update, :destroy, :in_stock, :orders, :ingredients, :ingredient_stock]
 
   include TransformerHelper
 
@@ -60,6 +60,16 @@ class ProductController < ApplicationController
 
   def ingredients
     render json: TransformerHelper::IngredientFormat.transform_product_ingredients(@product.ingredients)
+  end
+
+  def ingredient_stock
+    ingredients = @product.ingredients
+    if ingredients.length > 0
+      data = ingredients.map{|ingredient| { name: ingredient.name, stock: ingredient.ingredient_stocks.select{|stock| stock.used}.map{|stock| {lot: stock.lot, best_before: stock.best_before}}}}
+      render json: data
+    else
+      render json: {status: 400, message: "Unable to find ingredients"}
+    end
   end
 
   private 
