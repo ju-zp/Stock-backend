@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2020_01_19_110938) do
     t.date "best_before"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "shelf"
     t.integer "lot"
     t.boolean "used", default: false
     t.index ["ingredient_id"], name: "index_ingredient_stocks_on_ingredient_id"

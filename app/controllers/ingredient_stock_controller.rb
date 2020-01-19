@@ -1,6 +1,6 @@
 class IngredientStockController < ApplicationController
 
-  before_action :get_ingredient, only: [:index, :create]
+  before_action :get_ingredient, only: [:index, :create, :update]
 
   def index
     if @ingredient
@@ -17,6 +17,22 @@ class IngredientStockController < ApplicationController
       render json: {status: 200}
     else
       render json: {status: 400, message: "Unable to save"}
+    end
+  end
+
+  def update
+    stock = @ingredient.ingredient_stocks.select{|stock| stock.lot === params[:lot]}
+    if stock 
+      stock.lot = params[:lot]
+      stock.best_before = params[:best_before]
+      stock.rec = params[:rec]
+      stock.shelf = params[:shelf]
+      stock.used = params[:used]
+      if stock.save
+        render json: {status: 200}
+      else
+        render json: {status: 400, message: "Unable to save"}
+      end
     end
   end
 
