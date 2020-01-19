@@ -21,7 +21,7 @@ class IngredientStockController < ApplicationController
   end
 
   def update
-    stock = @ingredient.ingredient_stocks.select{|stock| stock.lot === params[:lot]}
+    stock = @ingredient.ingredient_stocks.select{|stock| stock.lot === params[:lot]}[0]
     if stock 
       stock.lot = params[:lot]
       stock.best_before = params[:best_before]

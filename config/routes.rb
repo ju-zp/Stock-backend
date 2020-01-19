@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   get '/product/:slug/ingredients', to: 'product#ingredients'
   get '/ingredient/:name/stock', to: 'ingredient_stock#index'
   post '/ingredient/:name/stock', to: 'ingredient_stock#create'
+  patch '/ingredient/:name/stock', to: 'ingredient_stock#update'
   resources :batch, :order, :recipe, :ingredient
 end
