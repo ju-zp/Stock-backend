@@ -23,7 +23,7 @@ class IngredientStockController < ApplicationController
   private
 
   def ingredient_stock_params
-    params.require(:ingredient_stock).permit(:rec, :best_before, :shelf)
+    params.require(:ingredient_stock).permit(:lot, :rec, :best_before, :shelf)
   end
 
   def get_ingredient
