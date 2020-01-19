@@ -4,7 +4,7 @@ class IngredientStockController < ApplicationController
 
   def index
     if @ingredient
-      render json: @ingredient.ingredient_stocks
+      render json: @ingredient.ingredient_stocks.select{|stock| !stock.used }
     else
       render json: { message: 'Could not find ingredient'}
     end
