@@ -43,7 +43,7 @@ class IngredientStockController < ApplicationController
   end
 
   def get_ingredient
-    @ingredient = Ingredient.find_by name: params[:name].capitalize
+    @ingredient = Ingredient.find_by name: params[:name].titleize
   end
 
 end
