@@ -65,7 +65,7 @@ class ProductController < ApplicationController
   def ingredient_stock
     ingredients = @product.ingredients
     if ingredients.length > 0
-      data = ingredients.map{|ingredient| { name: ingredient.name, stock: ingredient.ingredient_stocks.select{|stock| stock.used}.map{|stock| {lot: stock.lot, best_before: stock.best_before}}}}
+      data = ingredients.map{|ingredient| { name: ingredient.name, stock: ingredient.ingredient_stocks.select{|stock| !stock.used}.map{|stock| {lot: stock.lot, best_before: stock.best_before}}}}
       render json: data
     else
       render json: {status: 400, message: "Unable to find ingredients"}
