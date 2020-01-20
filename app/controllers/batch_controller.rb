@@ -17,8 +17,9 @@ class BatchController < ApplicationController
     if(@batch.save)
       params[:selectedIngredients].map do |si| 
         stock = find_ingredient_stock si
-        BatchIngredient.new(batch: @batch, ingredient_stock: stock)
-        Batch.save()
+        batch_ingredient = BatchIngredient.new(batch: @batch, ingredient_stock: stock)
+        byebug
+        batch_ingredient.save()
       end
       render json: {}
     else
@@ -71,6 +72,6 @@ class BatchController < ApplicationController
 
   def find_ingredient_stock ingredient
     selectedIngredient = Ingredient.find_by name: ingredient[:name]
-    return selectedIngredient.ingredient_stocks.select{|s| s[:lot] == ingre[:lot] }[0]
+    return selectedIngredient.ingredient_stocks.select{|s| s[:lot] == ingredient[:lot] }[0]
   end
 end
