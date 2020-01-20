@@ -11,14 +11,19 @@ class BatchController < ApplicationController
 
   def create
     byebug
-    # @batch = Batch.new(batch_params)
-    # @batch.product = @product
-    # @batch.best_before = Date.parse(params[:bestBefore])
-    # if(@batch.save)
-    #   render json: {}
-    # else
-    #   render json: {message: 'Unable to save'}, status: 400
-    # end
+    @batch = Batch.new(batch_params)
+    @batch.product = @product
+    @batch.best_before = Date.parse(params[:bestBefore])
+    if(@batch.save)
+      params[:selectedIngredients].map do |si| 
+        stock = find_ingredient_stock si
+        BatchIngredient.new(batch: @batch, ingredient_stock: stock)
+        Batch.save()
+      end
+      render json: {}
+    else
+      render json: {message: 'Unable to save'}, status: 400
+    end
   end
 
   def show
@@ -64,4 +69,8 @@ class BatchController < ApplicationController
     return {id: batch[:id], code: batch[:code], quantity: batch[:quantity], best_before: batch[:best_before], sold: batch.get_sold, product: @product.name, product_slug: @product.slug}
   end
 
+  def find_ingredient_stock ingredient
+    selectedIngredient = Ingredient.find_by name: ingredient[:name]
+    return selectedIngredient.ingredient_stocks.select{|s| s[:lot] == ingre[:lot] }[0]
+  end
 end
