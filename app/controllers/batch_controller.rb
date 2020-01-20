@@ -10,14 +10,15 @@ class BatchController < ApplicationController
   end
 
   def create
-    @batch = Batch.new(batch_params)
-    @batch.product = @product
-    @batch.best_before = Date.parse(params[:bestBefore])
-    if(@batch.save)
-      render json: {}
-    else
-      render json: {message: 'Unable to save'}, status: 400
-    end
+    byebug
+    # @batch = Batch.new(batch_params)
+    # @batch.product = @product
+    # @batch.best_before = Date.parse(params[:bestBefore])
+    # if(@batch.save)
+    #   render json: {}
+    # else
+    #   render json: {message: 'Unable to save'}, status: 400
+    # end
   end
 
   def show
