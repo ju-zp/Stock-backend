@@ -10,7 +10,6 @@ class BatchController < ApplicationController
   end
 
   def create
-    byebug
     @batch = Batch.new(batch_params)
     @batch.product = @product
     @batch.best_before = Date.parse(params[:bestBefore])
@@ -18,7 +17,6 @@ class BatchController < ApplicationController
       params[:selectedIngredients].map do |si| 
         stock = find_ingredient_stock si
         batch_ingredient = BatchIngredient.new(batch: @batch, ingredient_stock: stock)
-        byebug
         batch_ingredient.save()
       end
       render json: {}
