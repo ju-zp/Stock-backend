@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_02_161853) do
+ActiveRecord::Schema.define(version: 2020_01_20_142334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "batch_ingredients", force: :cascade do |t|
+    t.bigint "batch_id"
+    t.bigint "ingredient_stock_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["batch_id"], name: "index_batch_ingredients_on_batch_id"
+    t.index ["ingredient_stock_id"], name: "index_batch_ingredients_on_ingredient_stock_id"
+  end
 
   create_table "batch_orders", force: :cascade do |t|
     t.bigint "batch_id"
@@ -39,8 +48,11 @@ ActiveRecord::Schema.define(version: 2019_11_02_161853) do
     t.bigint "ingredient_id"
     t.date "rec"
     t.date "best_before"
+    t.date "shelf"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "lot"
+    t.boolean "used", default: false
     t.index ["ingredient_id"], name: "index_ingredient_stocks_on_ingredient_id"
   end
 
@@ -81,6 +93,8 @@ ActiveRecord::Schema.define(version: 2019_11_02_161853) do
     t.index ["product_id"], name: "index_recipes_on_product_id"
   end
 
+  add_foreign_key "batch_ingredients", "batches"
+  add_foreign_key "batch_ingredients", "ingredient_stocks"
   add_foreign_key "batch_orders", "batches"
   add_foreign_key "batch_orders", "orders"
   add_foreign_key "batches", "products"
