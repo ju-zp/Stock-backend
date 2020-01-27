@@ -1,5 +1,5 @@
 class BatchController < ApplicationController 
-  before_action :get_batch, only: [:show, :update, :destroy]
+  before_action :get_batch, only: [:show, :update, :destroy, :ingredients]
   before_action :get_product, only: [:create, :update]
 
   def index
@@ -47,6 +47,10 @@ class BatchController < ApplicationController
     else
       render json: {message: 'Unable to delete resource'}
     end
+  end
+
+  def ingredients
+    byebug
   end
 
   private
