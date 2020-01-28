@@ -51,7 +51,7 @@ class BatchController < ApplicationController
 
   def ingredients
     ingredient_stock = @batch.ingredient_stocks
-    ingredients = ingredient_stock.map{|i| {ingredient: i.ingredient.name, rec: i.rec, best_before: i.best_before, shelf: i.shelf}}
+    ingredients = ingredient_stock.map{|i| {ingredient: i.ingredient.name, rec: i.rec, best_before: i.best_before, shelf: i.shelf, lot: i.lot}}
     render json: ingredients
   end
 
