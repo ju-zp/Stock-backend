@@ -21,18 +21,18 @@ batch1 = Batch.create(code:'1242321', quantity:300, best_before:"2020-12-01", pr
 batch2 = Batch.create(code:'1647132', quantity:400, best_before:"2020-10-01", product:bar2)
 batch3 = Batch.create(code:'2167384', quantity:250, best_before:"2020-06-12", product:bar3)
 
-order1 = Order.create(order_ref:"BAR-2361729")
-order2 = Order.create(order_ref:"BAR-1237123")
-order3 = Order.create(order_ref:"BAR-1267312")
+# order1 = Order.create(order_ref:"BAR-2361729")
+# order2 = Order.create(order_ref:"BAR-1237123")
+# order3 = Order.create(order_ref:"BAR-1267312")
 
-BatchOrder.create(batch:batch1, order:order1, quantity:4)
-BatchOrder.create(batch:batch2, order:order1, quantity:3)
-BatchOrder.create(batch:batch3, order:order1, quantity:2)
+# BatchOrder.create(batch:batch1, order:order1, quantity:4)
+# BatchOrder.create(batch:batch2, order:order1, quantity:3)
+# BatchOrder.create(batch:batch3, order:order1, quantity:2)
 
-BatchOrder.create(batch:batch1, order:order2, quantity:3)
-BatchOrder.create(batch:batch2, order:order2, quantity:7)
-BatchOrder.create(batch:batch3, order:order2, quantity:1)
+# BatchOrder.create(batch:batch1, order:order2, quantity:3)
+# BatchOrder.create(batch:batch2, order:order2, quantity:7)
+# BatchOrder.create(batch:batch3, order:order2, quantity:1)
 
-BatchOrder.create(batch:batch1, order:order3, quantity:10)
+# BatchOrder.create(batch:batch1, order:order3, quantity:10)
 
 
