@@ -1,5 +1,5 @@
 class BatchController < ApplicationController 
-  before_action :get_batch, only: [:show, :update, :destroy]
+  before_action :get_batch, only: [:show, :update, :destroy, :ingredients]
   before_action :get_product, only: [:create, :update]
 
   def index
@@ -14,6 +14,11 @@ class BatchController < ApplicationController
     @batch.product = @product
     @batch.best_before = Date.parse(params[:bestBefore])
     if(@batch.save)
+      params[:selectedIngredients].map do |si| 
+        stock = find_ingredient_stock si
+        batch_ingredient = BatchIngredient.new(batch: @batch, ingredient_stock: stock)
+        batch_ingredient.save()
+      end
       render json: {}
     else
       render json: {message: 'Unable to save'}, status: 400
@@ -44,6 +49,12 @@ class BatchController < ApplicationController
     end
   end
 
+  def ingredients
+    ingredient_stock = @batch.ingredient_stocks
+    ingredients = ingredient_stock.map{|i| {ingredient: i.ingredient.name, rec: i.rec, best_before: i.best_before, shelf: i.shelf}}
+    render json: ingredients
+  end
+
   private
 
   def batch_params
@@ -63,4 +74,8 @@ class BatchController < ApplicationController
     return {id: batch[:id], code: batch[:code], quantity: batch[:quantity], best_before: batch[:best_before], sold: batch.get_sold, product: @product.name, product_slug: @product.slug}
   end
 
+  def find_ingredient_stock ingredient
+    selectedIngredient = Ingredient.find_by name: ingredient[:name]
+    return selectedIngredient.ingredient_stocks.select{|s| s[:lot] == ingredient[:lot] }[0]
+  end
 end

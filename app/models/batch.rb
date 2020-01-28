@@ -2,6 +2,8 @@ class Batch < ApplicationRecord
   belongs_to :product
   has_many :batch_orders
   has_many :orders, through: :batch_orders
+  has_many :batch_ingredients
+  has_many :ingredient_stocks, through: :batch_ingredients
 
   before_destroy :destroy_batch_orders, :destroy_orders
 

@@ -29,7 +29,7 @@ class RecipeController < ApplicationController
   private
 
   def get_product
-    @product = Product.find_by slug: params[:product]
+    @product = Product.find_by name: params[:product]
   end
 
   def add_ingredients_to_recipe(params, recipe)
