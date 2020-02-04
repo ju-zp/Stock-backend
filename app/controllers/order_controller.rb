@@ -27,19 +27,12 @@ class OrderController < ApplicationController
 
   def show
     @batch_orders = @order.batch_orders
+    @batch_orders = @batch_orders.map{|o| {'quantity': o.quantity, 'batch': o.batch, 'product': o.batch.product.name}}
     data = {}
     data['order_ref'] = @order[:order_ref]
     data['id'] = @order[:id]
-    newArray = []
-    @batch_orders.each do |b|
-      newObj = {}
-      newObj['quantity'] = b.quantity
-      newObj['batch'] = b.batch
-      newObj['product'] = b.batch.product.name
-      newArray.push(newObj)
-    end
-    data['products'] = newArray
-    render json: {body: data}
+    data['products'] = @batch_orders
+    render json: data
   end
 
   def update
