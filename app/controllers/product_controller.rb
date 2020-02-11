@@ -1,5 +1,3 @@
-# require 'cloudinary'
-
 class ProductController < ApplicationController
   before_action :get_product, only: [:show, :update, :destroy, :in_stock, :orders, :ingredients, :ingredient_stock]
 
