@@ -3,6 +3,7 @@ class ProductController < ApplicationController
 
   include TransformerHelper
 
+
   def index
     products = Product.all
     newArray = []
@@ -16,9 +17,9 @@ class ProductController < ApplicationController
 
   def create
     product = Product.new(product_params)
-
+    sample = Cloudinary::Uploader.upload(params[:image_url][:file], :public_id => params[:image_url][:name], :overwrite => true)
+    product[:image_url] = sample['url']
     if product.validate 
-
       if product.save
         render json: {status: 200}
       else
