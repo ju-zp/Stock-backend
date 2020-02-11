@@ -1,7 +1,10 @@
+# require 'cloudinary'
+
 class ProductController < ApplicationController
   before_action :get_product, only: [:show, :update, :destroy, :in_stock, :orders, :ingredients, :ingredient_stock]
 
   include TransformerHelper
+
 
   def index
     products = Product.all
@@ -16,19 +19,20 @@ class ProductController < ApplicationController
 
   def create
     product = Product.new(product_params)
+    sample = Cloudinary::Uploader.upload(params[:image_url][:file], :public_id => params[:image_url][:name], :overwrite => true)
+    product[:image_url] = sample['url']
     byebug
+    if product.validate 
 
-    # if product.validate 
+      if product.save
+        render json: {status: 200}
+      else
+        render json: {status: 400, message: "Unable to save"}
+      end
 
-    #   if product.save
-    #     render json: {status: 200}
-    #   else
-    #     render json: {status: 400, message: "Unable to save"}
-    #   end
-
-    # else
+    else
       render json: { error: product.errors.messages}, status: :not_acceptable
-    # end
+    end
   end
 
   def show
