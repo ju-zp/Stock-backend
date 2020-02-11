@@ -16,18 +16,19 @@ class ProductController < ApplicationController
 
   def create
     product = Product.new(product_params)
+    byebug
 
-    if product.validate 
+    # if product.validate 
 
-      if product.save
-        render json: {status: 200}
-      else
-        render json: {status: 400, message: "Unable to save"}
-      end
+    #   if product.save
+    #     render json: {status: 200}
+    #   else
+    #     render json: {status: 400, message: "Unable to save"}
+    #   end
 
-    else
+    # else
       render json: { error: product.errors.messages}, status: :not_acceptable
-    end
+    # end
   end
 
   def show
