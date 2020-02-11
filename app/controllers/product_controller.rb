@@ -21,7 +21,6 @@ class ProductController < ApplicationController
     product = Product.new(product_params)
     sample = Cloudinary::Uploader.upload(params[:image_url][:file], :public_id => params[:image_url][:name], :overwrite => true)
     product[:image_url] = sample['url']
-    byebug
     if product.validate 
 
       if product.save
